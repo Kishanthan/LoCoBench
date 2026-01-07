@@ -55,6 +55,7 @@ cp api.sh.template api.sh
 
 # Edit api.sh with your API keys
 export OPENAI_API_KEY="your_openai_key_here"
+export OPENAI_BASE_URL="https://your-openai-compatible-endpoint/v1"  # Optional
 export ANTHROPIC_API_KEY="your_anthropic_key_here"
 export GOOGLE_API_KEY="your_google_key_here"
 
@@ -72,6 +73,9 @@ Run evaluation on all LoCoBench scenarios:
 ```bash
 # Evaluate a single model on all scenarios
 locobench evaluate --model gpt-4o --config-path config.yaml
+
+# Evaluate a custom OpenAI-compatible endpoint/model
+locobench evaluate --model your-model-name --config-path config.yaml
 
 # Evaluate specific task categories
 locobench evaluate --model claude-sonnet-4 --task-category architectural_understanding --difficulty hard
@@ -149,4 +153,3 @@ This project is licensed under the Apache License 2.0 - see the [LICENSE](LICENS
 
 - Salesforce AI Research for supporting this research
 - The open-source community for various tools and libraries used in this project
-

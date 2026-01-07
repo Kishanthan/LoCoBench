@@ -13,6 +13,8 @@ echo
 # 🏆 ELITE MODEL 1: OpenAI o3 (Direct API)
 # =============================================================================
 export OPENAI_API_KEY="your-openai-api-key-here"
+# Optional: OpenAI-compatible endpoint (leave unset for api.openai.com)
+export OPENAI_BASE_URL="https://your-openai-compatible-endpoint/v1"
 
 # =============================================================================
 # 🏆 ELITE MODEL 2: Claude Sonnet 4 (Bearer Token Authentication)

@@ -9,6 +9,7 @@
 api:
   # API Keys (set via environment variables for security)
   # openai_api_key: "your-openai-key-here"
+  # openai_base_url: "https://your-openai-compatible-endpoint/v1"
   # google_api_key: "your-google-key-here"
   # huggingface_token: "your-hf-token-here"
   

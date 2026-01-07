@@ -311,9 +311,10 @@ class MultiLLMGenerator:
     def setup_llm_clients(self):
         """Initialize LLM API clients (OpenAI o3 + Gemini 2.5 Pro + Claude 4 via Bearer Token)"""
         # OpenAI o3
-        self.openai_client = openai.AsyncOpenAI(
-            api_key=self.config.api.openai_api_key
-        )
+        openai_client_kwargs = {"api_key": self.config.api.openai_api_key}
+        if self.config.api.openai_base_url:
+            openai_client_kwargs["base_url"] = self.config.api.openai_base_url
+        self.openai_client = openai.AsyncOpenAI(**openai_client_kwargs)
         
         # Gemini 2.5 Pro
         genai.configure(api_key=self.config.api.google_api_key)

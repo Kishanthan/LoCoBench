@@ -13,6 +13,7 @@ from dataclasses import dataclass, field
 class APIConfig:
     """Configuration for LLM APIs"""
     openai_api_key: Optional[str] = None
+    openai_base_url: Optional[str] = None
     google_api_key: Optional[str] = None
     huggingface_token: Optional[str] = None
     # Claude Bearer Token Authentication (replaces AWS credentials)
@@ -189,11 +190,12 @@ class Config:
         
         # Extract environment variables for API keys
         api_config = yaml_data.get('api', {})
-        api_config['openai_api_key'] = os.getenv('OPENAI_API_KEY')
-        api_config['google_api_key'] = os.getenv('GEMINI_API_KEY')  # Using GEMINI_API_KEY as set in api.sh
-        api_config['huggingface_token'] = os.getenv('HUGGINGFACE_TOKEN')
+        api_config['openai_api_key'] = os.getenv('OPENAI_API_KEY') or api_config.get('openai_api_key')
+        api_config['openai_base_url'] = os.getenv('OPENAI_BASE_URL') or api_config.get('openai_base_url')
+        api_config['google_api_key'] = os.getenv('GEMINI_API_KEY') or api_config.get('google_api_key')  # Using GEMINI_API_KEY as set in api.sh
+        api_config['huggingface_token'] = os.getenv('HUGGINGFACE_TOKEN') or api_config.get('huggingface_token')
         # Claude Bearer Token Authentication (replaces AWS credentials)
-        api_config['claude_bearer_token'] = os.getenv('CLAUDE_BEARER_TOKEN')
+        api_config['claude_bearer_token'] = os.getenv('CLAUDE_BEARER_TOKEN') or api_config.get('claude_bearer_token')
         
         return cls(
             api=APIConfig(**api_config),
@@ -383,4 +385,3 @@ def get_model_max_tokens(model_name: str) -> int:
     # Default fallback
     else:
         return 8192    # Conservative default
-
